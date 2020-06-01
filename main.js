@@ -1,121 +1,72 @@
-function Chicago(city){
-    //console.info("Inside Chicago");
-    if (city == null){
-        console.info("bailing out");
-        return;
-       // console.log("info");
-    }
-    var chicagoURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city +"&units=imperial&appid=5c99d212268aebc8d4bc84ec41ff2da2";
-    console.info("chicagoURL");
-
-     return $.ajax({
-        url: chicagoURL,
-        method: "GET"
-      })
-      .then(function(response) {
-        var cityDiv = $("<div class = 'container'>")
-    
-        //console.log(response);
-        
-        var city = response.name; 
-       
-        var date = response.dt; 
-        date = new Date(date*1000);
-    
-        console.log("info");
-    
-        var dateString = `${date.getMonth()+1}/ ${date.getDate()}/${date.getFullYear()}`;
-        var pCity = $("<p>").text(city + " " + dateString);
-    
-        cityDiv.append(pCity);
-        
-        var temp = response.main.temp;
-        var pOne = $("<p>").text("Temperature: " + temp +" \u00B0F");
-        cityDiv.append(pOne);
-    
-        console.log("info");
-    
-        var humi = response.main.humidity; 
-        var pTwo = $("<p>").text("Humidity: " + humi);
-        cityDiv.append(pTwo);
-    
-        var WS = response.wind.speed; 
-        var pThree = $("<p>").text("Wind Speed: " + WS);
-        cityDiv.append(pThree);
-    
-        console.log("info");
-    
-        var UV = response.sys.type; 
-        var pFour = $("<p>").text("UV index: " + UV);
-        cityDiv.append(pFour);
-    
-        $("#Forecast").empty();
-       $("#Forecast").prepend(cityDiv);
-       console.log("info");
-       return response; 
-      });
-    }
+let temperature = document.querySelector('temperature');
+let cityHumidity = document.querySelector('humidity');
+let windSpeed = document.querySelector('windspeed');
+let city = document.querySelector('city');
+let cityDate = document.querySelector('date');
+let uvIndex = document.querySelector('uvindex');
 
 
+let appId = 'f16a4aeb39776d49f565a24db6f7accf';
+let searchMethod;
 
-    
-    function Chicago(city){
-        console.info("Inside Chicago");
-        if (city == null){
-            console.info("bailing out");
-            return;
-            console.log("info");
-        }
-        var chicagoURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city +"&units=imperial&appid=5c99d212268aebc8d4bc84ec41ff2da2";
-        console.info(chicagoURL);
-         return $.ajax({
-            url: chicagoURL,
-            method: "GET"
-          })
-          .then(function(response) {
-            var cityDiv = $("<div class = 'container'>")
-           
-            var results = response.data;
-        
-            console.log(response);
-            
-            var city = response.name; 
-           
-            var date = response.dt; 
-            date = new Date(date*1000);
-        
-            console.log("info");
-        
-            var dateString = `${date.getMonth()+1}/ ${date.getDate()}/${date.getFullYear()}`;
-            var pCity = $("<p>").text(city + " " + dateString);
-        
-            cityDiv.append(pCity);
-            
-            var temp = response.main.temp;
-            var pOne = $("<p>").text("Temperature: " + temp +" \u00B0F");
-            cityDiv.append(pOne);
-        
-            console.log("info");
-        
-            var humi = response.main.humidity; 
-            var pTwo = $("<p>").text("Humidity: " + humi);
-            cityDiv.append(pTwo);
-        
-            var WS = response.wind.speed; 
-            var pThree = $("<p>").text("Wind Speed: " + WS);
-            cityDiv.append(pThree);
-        
-            console.log("info");
-        
-            var UV = response.sys.type; 
-            var pFour = $("<p>").text("UV index: " + UV);
-            cityDiv.append(pFour);
-        
-            $("#Forecast").empty();
-           $("#Forecast").prepend(cityDiv);
-           console.log("info");
-           return response; 
-          });
-        }
-        
-    
+function getSearchMethod(searchTerm) {
+   if(searchTerm.length === 5 && Number.parseInt(searchTerm) + '' === searchTerm)
+       searchMethod = 'zip';
+   else 
+       searchMethod = 'q';
+}
+
+function searchCurrentWeather(searchTerm) {
+   getSearchMethod(searchTerm);
+   fetch(`http://api.openweathermap.org/data/2.5/weather?${searchMethod}=${searchTerm}&APPID=${appId}`)
+       .then((response) => {
+           return response.json();
+       }).then((data) => {
+           console.log(data);
+           getCurrentCityWeatherReport(data);
+          
+   });
+}
+
+
+function searchForecastWeather(searchTerm) {
+   getSearchMethod(searchTerm);
+   fetch(`http://api.openweathermap.org/data/2.5/forecast?${searchMethod}=${searchTerm}&APPID=${appId}`)
+       .then((response) => {
+           return response.json();
+       }).then((data) => {
+           console.log(data);
+           // getCityForecastWeatherReport(data);
+          
+   });
+}
+
+
+//  function getCurrentCityWeatherReport(data){
+//      cityHumidity.innerHTML = ${data.main.humidity};
+//      temperature.innerHTML = ${data.main.temp};
+
+//      city.innerHTML = ${data.name};
+//      windSpeed.innerHTML = ${data.wind.speed};
+
+
+//  }
+
+//  function getCityForecastWeatherReport(weatherData){
+//      const forecast = document.querySelector('.displayCityForecast');
+
+//      const displayForecast = document.createElement('div');
+//      displayForecast.innerHTML = 
+//                                 '<div>${weatherData.list.dt_txt}</div>
+//                                 <div><div>Temp:</div>${weatherData.list.main.temp}'</div>
+//                                 <div><div>Humidity:</div>${weatherData.list.main.humidity}</div>';
+//                            forecast.appendChild(displayForecast);     
+
+//  }
+
+document.getElementById('searchBtn').addEventListener('click', () => {
+   let searchTerm = document.getElementById('searchInput').value;
+   if(searchTerm)
+   searchCurrentWeather(searchTerm);
+   searchForecastWeather(searchTerm);
+});

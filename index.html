@@ -1,88 +1,39 @@
-<html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
     <link rel="stylesheet" href="style.css">
-    <title>Work Day Scheduler</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<header>
+  <h2>Weather Dashboard</h2>
+</header>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="index.js"> </script>
-  </head>
+<section>
+    <div> Search for a City </div>
+    <div id="searchContainer">
+      <input class="searchControl" type="text" placeholder="City Name or Zipcode" id="searchInput">
+      <button class="searchControl" id="searchBtn">Search</button>
+  </div>
+    <!-- <div class="addSearchHistory"></div>
+  
+  <div class="displayCurrentCity">
+    <div class="cityDateIcon"><span class="city"></span><span class="date"></span><img src="icons/unknown.png" alt=""></div>
+    <div>Temperature:</div> <div class="temperature"><p>- °<span>F</span></p></div>
+    <div>Humidity:</div><div class="humidity"><span>%</span></div>
+    <div>Wind Speed:</div><div class="windspeed"><span>MPH</span></div>
+    <div>UV Index:</div><div class="uvindex"></div>
+  </div>
+      
+  <div>5-Day Forecast:</div>
+  <div>
+  <div class="displayCityForecast"></div>
+  </div> -->
+</section>
 
-
-  <body>
-    <header class="jumbotron">
-      <h1 class="display-3">Weather Dashboard</h1>
-      <p class="lead">Weather Dashboard to outset Given input </p>
-      <p id="currentDay" class="lead"></p>
-    </header>
-
-      <!-- Timeblocks go here -->
-      <div class="row">
-        <div class="col-4">
-        <div class="location-input" id="search-input"placeholder="enter city Name">
-
-                <label class="row">Search</label>
-                <div class="row">
-                <input id="input">
-                <button class="btn btn-default" id="search-button"><span class="fa fa-search"></span></button>
-            </div>
-
-                <div class="row">
-                    <div class="col" id="button-list">
-                    </div>
-                </div>
-
-
-
-            </div>
-            
-
-            <div class="row">
-                <div class="column">
-                <div class="card">
-                    <h3>Card 2</h3>
-                    <p>Some text</p>
-                    <p>Some text</p>
-                    </div>
-                </div>
-            
-                <div class="column">
-                    <div class="card">
-                      <h3>Card 2</h3>
-                      <p>Some text</p>
-                      <p>Some text</p>
-                    </div>
-                  </div>
-                
-                <div class="column">
-                  <div class="card">
-                    <h3>Card 3</h3>
-                    <p>Some text</p>
-                    <p>Some text</p>
-                  </div>
-                </div>
-                
-                <div class="column">
-                  <div class="card">
-                    <h3>Card 4</h3>
-                    <p>Some text</p>
-                    <p>Some text</p>
-                  </div>
-                </div>
-              </div>
-              
-
-
-
-
-        
-    
-    <div class="times">
-
-
-</div>
-</div></div></body></html>
+<script src="app.js"></script>
+</body>
+</html>
