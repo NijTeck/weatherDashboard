@@ -1,9 +1,9 @@
-let temperature = document.querySelector('temperature');
-let cityHumidity = document.querySelector('humidity');
-let windSpeed = document.querySelector('windspeed');
-let city = document.querySelector('city');
-let cityDate = document.querySelector('date');
-let uvIndex = document.querySelector('uvindex');
+let temperature = document.querySelector('.temperature');
+let cityHumidity = document.querySelector('.humidity');
+let windSpeed = document.querySelector('.windspeed');
+let city = document.querySelector('.city');
+let cityDate = document.querySelector('.date');
+let uvIndex = document.querySelector('.uvindex');
 
 
 let appId = 'f16a4aeb39776d49f565a24db6f7accf';
@@ -22,7 +22,7 @@ function searchCurrentWeather(searchTerm) {
        .then((response) => {
            return response.json();
        }).then((data) => {
-           console.log(data);
+        
            getCurrentCityWeatherReport(data);
           
    });
@@ -35,22 +35,24 @@ function searchForecastWeather(searchTerm) {
        .then((response) => {
            return response.json();
        }).then((data) => {
-           console.log(data);
+     
            // getCityForecastWeatherReport(data);
           
    });
 }
 
 
-//  function getCurrentCityWeatherReport(data){
-//      cityHumidity.innerHTML = ${data.main.humidity};
-//      temperature.innerHTML = ${data.main.temp};
 
-//      city.innerHTML = ${data.name};
-//      windSpeed.innerHTML = ${data.wind.speed};
+function getCurrentCityWeatherReport(data){
+    console.log(data);
+cityHumidity.innerHTML = data.main.humidity;
+console.log(cityHumidity);
+temperature.innerHTML = data.main.temp;
+city.innerHTML = $data.name;
+windSpeed.innerHTML = $data.wind.speed;
 
 
-//  }
+  }
 
 //  function getCityForecastWeatherReport(weatherData){
 //      const forecast = document.querySelector('.displayCityForecast');
@@ -63,10 +65,12 @@ function searchForecastWeather(searchTerm) {
 //                            forecast.appendChild(displayForecast);     
 
 //  }
-
-document.getElementById('searchBtn').addEventListener('click', () => {
+var searchBtn = document.getElementById('searchBtn');
+searchBtn.addEventListener('click', () => {
+    
    let searchTerm = document.getElementById('searchInput').value;
    if(searchTerm)
    searchCurrentWeather(searchTerm);
    searchForecastWeather(searchTerm);
 });
+
